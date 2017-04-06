@@ -6,7 +6,7 @@ public abstract class CreateArtifact {
 	abstract void getLoginParams(String fileName);
 	abstract void createArtifact(String fileName);
 
-	   //template method
+	//template pattern method
 	public final void execute(){	      
 		getLoginParams(fileName);		
 		createArtifact(fileName);
