@@ -46,13 +46,14 @@ public class CreateSTDefect extends CreateArtifact{
 		String defectType = "" ;
 		String environment = "" ;
 		String environmentOther = "" ;
-		String defectTag = ""; 
+		String defectTag = "";
+		int startAt = 1;
 	
-		public void getLoginParams(String fileName) { 
+		public void getLoginParams() { 
 			
 			try
 	        {
-	            FileInputStream file = new FileInputStream(new File(fileName));
+	            FileInputStream file = new FileInputStream(new File(super.getFileName()));
 	 
 	            //Create Workbook instance holding reference to .xlsx file
 	            XSSFWorkbook workbook = new XSSFWorkbook(file);
@@ -60,8 +61,7 @@ public class CreateSTDefect extends CreateArtifact{
 	            //Get first/desired sheet from the workbook
 	            XSSFSheet commonParamsSheet = workbook.getSheetAt(0);
 	            //XSSFSheet defectListSheet = workbook.getSheetAt(1);
-	 
-	                      
+	 	                      
 	            Row row = null;
 	            //System.out.println(workbook.getSheetName(0));
 	         
@@ -113,40 +113,41 @@ public class CreateSTDefect extends CreateArtifact{
 			
 		}
 										
-		public void createArtifact(String filePath) {						
+		public void createArtifact() {						
 			 try
 		        {
-		            FileInputStream file = new FileInputStream(new File(filePath));
+		            FileInputStream file = new FileInputStream(new File(super.getFileName()));
 		 		            
 		            @SuppressWarnings("resource")
 					XSSFWorkbook workbook = new XSSFWorkbook(file);		 		            
 		            XSSFSheet defectListSheet = workbook.getSheetAt(1);
 		 		                      
 		            Row row = null;
+		            int startAt = super.getStartAt();
 		           		            
 		            System.out.println(workbook.getSheetName(1));	        		    		
 		            
 		            if  ("defectlist".equals(workbook.getSheetName(1))) {
 		            	System.out.println ("inside defect list");
-		            	for (int j = 1; j <= defectListSheet.getLastRowNum (); ++j) {
+		            	for (int j = startAt; j <= defectListSheet.getLastRowNum (); ++j) {
 		            		row=(Row) defectListSheet.getRow(j);
 		            		
-		            		this.defectTitle = row.getCell(1).getStringCellValue() ;
-		            		this.defectSummary = row.getCell(2).getStringCellValue() ;
-		            		this.defectStepsToReproduce = row.getCell(3).getStringCellValue() ;
-		            		this.defectComments = row.getCell(4).getStringCellValue() ;
-		            		this.defectAttachments = row.getCell(5).getStringCellValue() ;
-		            		this.coe = row.getCell(6).getStringCellValue() ;
-		            		this.integratedRelease = row.getCell(7).getStringCellValue() ;
-		            		this.ownedBy = row.getCell(8).getStringCellValue()  ;
-		            		this.defectSeverity = row.getCell(9).getStringCellValue() ;
-		            		this.defectPriority = row.getCell(10).getStringCellValue() ;
-		            		this.testPhase = row.getCell(11).getStringCellValue() ;
-		            		this.earliestPhaseDetectable = row.getCell(12).getStringCellValue() ;
-		            		this.defectType = row.getCell(13).getStringCellValue() ;
-		            		this.environment = row.getCell(14).getStringCellValue() ;
-		            		this.environmentOther = row.getCell(15).getStringCellValue() ;
-		            		this.defectTag = row.getCell(16).getStringCellValue(); 
+		            		this.defectTitle = (row.getCell(1) != null) ? row.getCell(1).getStringCellValue():"";
+		            		this.defectSummary = (row.getCell(2) != null) ? row.getCell(2).getStringCellValue():""; 
+		            		this.defectStepsToReproduce =(row.getCell(3) != null) ? row.getCell(3).getStringCellValue():""; 
+		            		this.defectComments = (row.getCell(4) != null) ? row.getCell(4).getStringCellValue():""; 		            		
+		            		this.defectAttachments = (row.getCell(5) != null)? row.getCell(5).getStringCellValue(): "" ;		            		
+		            		this.coe = (row.getCell(6) != null) ? row.getCell(6).getStringCellValue(): ""  ;
+		            		this.integratedRelease = (row.getCell(7) != null) ? row.getCell(7).getStringCellValue(): ""  ;
+		            		this.ownedBy = (row.getCell(8) != null) ? row.getCell(8).getStringCellValue(): ""  ; 
+		            		this.defectSeverity = (row.getCell(9) != null) ? row.getCell(9).getStringCellValue(): ""  ; 
+		            		this.defectPriority = (row.getCell(10) != null) ? row.getCell(10).getStringCellValue(): ""  ; 
+		            		this.testPhase = (row.getCell(11) != null) ? row.getCell(11).getStringCellValue(): ""  ; 
+		            		this.earliestPhaseDetectable = (row.getCell(12) != null) ? row.getCell(12).getStringCellValue(): ""  ; 
+		            		this.defectType = (row.getCell(13) != null) ? row.getCell(13).getStringCellValue(): ""  ; 
+		            		this.environment = (row.getCell(14) != null) ? row.getCell(14).getStringCellValue(): ""  ; 
+		            		this.environmentOther = (row.getCell(15) != null) ? row.getCell(15).getStringCellValue(): ""  ; 
+		            		this.defectTag = (row.getCell(16) != null) ? row.getCell(16).getStringCellValue(): ""  ; 
 		            		
 		            		if (this.defectTitle == "" || this.defectSummary == "" || this.coe == "" || this.ownedBy == "" ||
 		            		    this.defectSeverity == "" || this.testPhase == "" ||  this.earliestPhaseDetectable == "" || 
@@ -181,8 +182,7 @@ public class CreateSTDefect extends CreateArtifact{
 		    		file.close();
 		            
 		        }
-			
-		            
+					            
 		        catch (Exception e) 
 		        {
 		            e.printStackTrace();
@@ -191,7 +191,7 @@ public class CreateSTDefect extends CreateArtifact{
 		}
 		
 		
-		 public static void createDefect(CreateSTDefect inputExcel) {
+		 public static void createDefect(CreateSTDefect inputExcel) throws InterruptedException {
 		        // Create a new instance of the Firefox driver
 				   		              		
 				ProfilesIni profile = new ProfilesIni();
@@ -320,8 +320,15 @@ public class CreateSTDefect extends CreateArtifact{
 		        typeOnWebElementByTagName(driver,"body",inputExcel.defectComments);
 		        driver.switchTo().defaultContent();
 		         
-		        clickWebElementByXpath(driver, STDefectWebObject.SAVEBUTTON_XPATH );               
-		        System.out.println("Page title is: " + driver.getTitle());    
+		        clickWebElementByXpath(driver, STDefectWebObject.SAVEBUTTON_XPATH ); 
+		        
+		        driver.manage().timeouts().pageLoadTimeout(100, TimeUnit.SECONDS);
+		        		        
+		        
+		        waitForElementToPresent(driver,1000,STDefectWebObject.REFRESHBUTTON_XPATH );
+		        		        
+		        System.out.println(getTextFromWebElementByXpath(driver,STDefectWebObject.DEFECTNUMBER_XPATH ) + " created successfully" ); 		        	
+		        
 		        driver.manage().timeouts().pageLoadTimeout(200, TimeUnit.SECONDS);
 		     
 		        //Close the browser
@@ -337,6 +344,12 @@ public class CreateSTDefect extends CreateArtifact{
 				    WebDriverWait wait = new WebDriverWait(newDriver,timeoutInSeconds);
 				    wait.until(ExpectedConditions.visibilityOf(element));
 				}
+			   
+			   public static void waitForElementToPresent(WebDriver newDriver, int timeoutInSeconds, String Xpath) {				   
+				    WebDriverWait wait = new WebDriverWait(newDriver,timeoutInSeconds);
+				    wait.until(ExpectedConditions.visibilityOfElementLocated (By.xpath(Xpath)));
+				}
+			   
 			   
 			   public static void clickWebElementByXpath(WebDriver newDriver, String xpath) {
 				   	WebElement uiElement = newDriver.findElement(By.xpath( xpath));
@@ -362,4 +375,9 @@ public class CreateSTDefect extends CreateArtifact{
 				   Select select = new Select(newDriver.findElement(By.xpath( xpath)));
 			       select.selectByVisibleText(selectText);
 				}
+			   
+			   public static String getTextFromWebElementByXpath(WebDriver newDriver, String xpath) {				   
+			       return newDriver.findElement(By.xpath( xpath)).getAttribute("innerText");
+				}
+			   			   
 }
