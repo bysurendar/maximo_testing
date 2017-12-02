@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:interface xsi:type="con:RestService" id="4cee31b5-6b87-44df-bd96-f9b0bfed151c" wadlVersion="http://wadl.dev.java.net/2009/02" name="Maximo Rest Interface" type="rest" basePath="" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config"><con:settings><con:setting id="4cee31b5-6b87-44df-bd96-f9b0bfed151cfileName">Maximo-Rest-Interface</con:setting><con:setting id="com.eviware.soapui.impl.rest.actions.service.Wadl2JavaAction@values-local"><![CDATA[<xml-fragment xmlns:con="http://eviware.com/soapui/config">
+  <con:entry key="Tool Args" value=""/>
+  <con:entry key="JAXB Customization File(s)" value=""/>
+  <con:entry key="Package" value=""/>
+  <con:entry key="Automatic Package Names" value="false"/>
+  <con:entry key="Java Args" value=""/>
+  <con:entry key="Output Directory" value=""/>
+</xml-fragment>]]></con:setting></con:settings><con:definitionCache type="TEXT" rootPart=""/><con:endpoints><con:endpoint>https://${#Project#WWM_Host}</con:endpoint></con:endpoints></con:interface>

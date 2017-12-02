@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:resource name="MXSR" path="/maxrest/rest/os/mxsr" id="33b58149-54ed-4669-9069-154e93122c09" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:con="http://eviware.com/soapui/config">
+	<con:settings>
+		<con:setting id="33b58149-54ed-4669-9069-154e93122c09fileName">MXSR</con:setting>
+	</con:settings>
+	<con:parameters>
+		<con:parameter>
+			<con:name>_lid</con:name>
+			<con:style>QUERY</con:style>
+		</con:parameter>
+		<con:parameter>
+			<con:name>_lpwd</con:name>
+			<con:value/>
+			<con:style>QUERY</con:style>
+			<con:default/>
+			<con:description xsi:nil="true"/>
+		</con:parameter>
+	</con:parameters>
+	<con:method name="Query Work Request by TICKETID" id="78afeee6-d31c-466c-8821-e662f945768a" method="GET">
+		<con:settings/>
+		<con:parameters>
+			<con:parameter>
+				<con:name>TICKETID</con:name>
+				<con:value/>
+				<con:style>QUERY</con:style>
+				<con:default/>
+				<con:path xsi:nil="true"/>
+				<con:description xsi:nil="true"/>
+			</con:parameter>
+		</con:parameters>
+		<con:representation type="RESPONSE">
+			<con:mediaType xsi:nil="true"/>
+			<con:status>0</con:status>
+			<con:params/>
+			<con:element>data</con:element>
+		</con:representation>
+		<con:representation type="RESPONSE">
+			<con:mediaType xsi:nil="true"/>
+			<con:status>0</con:status>
+			<con:params/>
+			<con:element>data</con:element>
+		</con:representation>
+		<con:representation type="RESPONSE">
+			<con:mediaType xsi:nil="true"/>
+			<con:status>0</con:status>
+			<con:params/>
+			<con:element>data</con:element>
+		</con:representation>
+		<con:representation type="RESPONSE">
+			<con:mediaType>application/xml</con:mediaType>
+			<con:status>200</con:status>
+			<con:params/>
+			<con:element xmlns:max="http://www.ibm.com/maximo">max:QueryMXSRResponse</con:element>
+		</con:representation>
+		<con:representation type="RESPONSE">
+			<con:mediaType xsi:nil="true"/>
+			<con:status>0</con:status>
+			<con:params/>
+			<con:element>data</con:element>
+		</con:representation>
+		<con:representation type="RESPONSE">
+			<con:mediaType xsi:nil="true"/>
+			<con:status>0</con:status>
+			<con:params/>
+			<con:element>data</con:element>
+		</con:representation>
+		<con:representation type="RESPONSE">
+			<con:mediaType xsi:nil="true"/>
+			<con:status>0</con:status>
+			<con:params/>
+			<con:element>data</con:element>
+		</con:representation>
+		<con:representation type="RESPONSE">
+			<con:mediaType xsi:nil="true"/>
+			<con:status>0</con:status>
+			<con:params/>
+			<con:element>data</con:element>
+		</con:representation>
+		<con:representation type="RESPONSE">
+			<con:mediaType xsi:nil="true"/>
+			<con:status>0</con:status>
+			<con:params/>
+			<con:element>data</con:element>
+		</con:representation>
+		<con:request name="Request" id="890ccd84-8272-43f3-8ef2-6b2d87350289" mediaType="application/json">
+			<con:settings>
+				<con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting>
+			</con:settings>
+			<con:endpoint>https://${#Project#WWM_Host}</con:endpoint>
+			<con:request/>
+			<con:originalUri>http://localhost/maxrest/rest/os/mxsr</con:originalUri>
+			<con:credentials>
+				<con:selectedAuthProfile>No Authorization</con:selectedAuthProfile>
+				<con:authType>No Authorization</con:authType>
+			</con:credentials>
+			<con:jmsConfig JMSDeliveryMode="PERSISTENT"/>
+			<con:jmsPropertyConfig/>
+			<con:parameters>
+				<con:entry key="_lpwd" value="${#Project#MaximoPwd}"/>
+				<con:entry key="_lid" value="${#Project#MaximoUid}"/>
+				<con:entry key="TICKETID" value="${#TestSuite#ServiceRequestId}"/>
+			</con:parameters>
+			<con:parameterOrder>
+				<con:entry>_lid</con:entry>
+				<con:entry>_lpwd</con:entry>
+				<con:entry>TICKETID</con:entry>
+			</con:parameterOrder>
+		</con:request>
+	</con:method>
+</con:resource>
